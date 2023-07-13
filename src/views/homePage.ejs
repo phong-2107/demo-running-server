@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <!-- Load an icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="navbar">
+        <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Home</a>
+        <a href="#"><i class="fa fa-fw fa-search"></i> Search</a>
+        <a href="#"><i class="fa fa-fw fa-envelope"></i> Contact</a>
+        <a href="#"><i class="fa fa-fw fa-user"></i> Login</a>
+    </div>
+
+    <div class="form">
+        <form action="/create-user" method="post">
+            <fieldset>
+                <legend>add new user</legend>
+                <div class="inputs">
+                    <div class="input-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email"><br><br>
+                    </div>
+                    <div class="input-group">
+                        <label for="fname">name:</label>
+                        <input type="text" id="fname" name="name"><br><br>
+                    </div>
+                    <div class="input-group">
+                        <label for="fname">city: </label>
+                        <input type="text" id="fname" name="city"><br><br>
+                    </div>
+
+                    <button class="submit">Save</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>

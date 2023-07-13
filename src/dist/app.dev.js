@@ -12,15 +12,23 @@ var connection = require('./config/database');
 
 var app = express();
 var port = process.env.PORT || 8888;
-var hostname = process.env.HOST_NAME; // config template engine
+var hostname = process.env.HOST_NAME; // config req.body
 
-configViewEngine(app); // config routes
+app.use(express.json());
+app.use(express.urlencoded({
+  extended: true
+})); // config template engine
 
-app.use('/test', webRoutes); // simple query
+configViewEngine(app); //config routes
 
-connection.query('SELECT * FROM Users u ', function (err, results, fields) {
-  console.log("result = ", results); // results contains rows returned by server
-});
+app.use('/', webRoutes); // // simple query
+// connection.query(
+//   'SELECT * FROM Users u ',
+//   function(err, results, fields) {
+//     console.log("result = ", results); // results contains rows returned by server
+//   }
+// );
+
 app.listen(port, hostname, function () {
   console.log("Example app listening on port ".concat(port));
 });
