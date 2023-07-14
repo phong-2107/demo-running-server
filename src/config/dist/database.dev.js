@@ -2,7 +2,7 @@
 
 require('dotenv').config();
 
-var mysql = require('mysql2'); // create the connection to database
+var mysql = require('mysql2/promise'); // create the connection to database
 
 
 var connection = mysql.createConnection({
