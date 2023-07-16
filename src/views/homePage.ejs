@@ -20,7 +20,7 @@
           border-bottom: 1px solid #ddd;
         }
 
-        tr:hover {background-color: coral;}
+        tr:hover {background-color: #DDE6ED;}
 
         .table_container{
             margin: 1.5rem 1rem;
@@ -41,8 +41,8 @@
     <div class="navbar">
         <a class="active" href="/"><i class="fa fa-fw fa-home"></i> Home</a>
         <a href="/User"><i class="fa fa-fw fa-envelope"></i> Users</a>
+        <a href="#"><i class="fa fa-fw fa-user"></i> Login</a>
     </div>
-
 
     <div class="table_container">
         <h2 class="title">List Users: </h2>
@@ -52,28 +52,21 @@
               <th>EMAIL</th>
               <th>NAME</th>
               <th>CITY</th>
+              <th>MORE</th>
             </tr>
-            <tr>
-              <td>Peter</td>
-              <td>Griffin</td>
-              <td>$100</td>
-              <td>$100</td>
-            </tr>
-            <tr>
-              <td>Lois</td>
-              <td>Griffin</td>
-              <td>$150</td>
-            </tr>
-            <tr>
-              <td>Joe</td>
-              <td>Swanson</td>
-              <td>$300</td>
-            </tr>
-            <tr>
-              <td>Cleveland</td>
-              <td>Brown</td>
-              <td>$250</td>
-            </tr>
+            <% for (let i = 0; i < listUsers.length; i++) { %>
+              <tr>
+                <td><%= listUsers[i].id %></td>
+                <td><%= listUsers[i].email %></td>
+                <td><%= listUsers[i].name %></td>
+                <td><%= listUsers[i].city %></td>
+
+                <td class="item__list-button">
+                  <a class="item_button" href="/update-user/<%= listUsers[i].id %>">edit</a>
+                  <a class="item_button">Delete</a>
+                </td>
+              </tr>
+            <% } %>
         </table>
     </div>
 

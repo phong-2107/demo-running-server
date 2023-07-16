@@ -75,6 +75,10 @@
     align-items: center;
     text-align: center;
 }
+
+.input-group_id{
+  display: none;
+}
 .input-group {
     margin: .5rem 0;
 }
@@ -86,4 +90,29 @@
     border: none;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, .1);
+}
+
+
+/* .item__list-button{
+
+} */
+
+.item_button{
+  border: none;
+  padding: .35rem;
+  border-radius: 3px;
+  background-color: #C5DFF8;
+  cursor: pointer;
+  list-style: none;
+  text-decoration: none;
+  color: #435B66;
+}
+
+.item_button:hover{
+  background-color: #7895CB;
+  color: #F8F1F1;
+}
+
+.item_button:first-child{
+  margin-right: 1rem;
 }
