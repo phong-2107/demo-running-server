@@ -35,23 +35,25 @@ var getAllUsers = function getAllUsers() {
   });
 };
 
-var updateUserById = function updateUserById(email, name, city, Id) {
-  var _ref3, _ref4, results, fields;
+var getUserById = function getUserById(Id) {
+  var _ref3, _ref4, results, fields, user;
 
-  return regeneratorRuntime.async(function updateUserById$(_context2) {
+  return regeneratorRuntime.async(function getUserById$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
           _context2.next = 2;
-          return regeneratorRuntime.awrap(connection.query("   update Users\n            set email = ?, name = ?, city = ?\n            where id = ?", [email, name, city, Id]));
+          return regeneratorRuntime.awrap(connection.query('select * from Users where id = ? ', [Id]));
 
         case 2:
           _ref3 = _context2.sent;
           _ref4 = _slicedToArray(_ref3, 2);
           results = _ref4[0];
           fields = _ref4[1];
+          user = results && results.length > 0 ? results[0] : {};
+          return _context2.abrupt("return", user);
 
-        case 6:
+        case 8:
         case "end":
           return _context2.stop();
       }
@@ -59,7 +61,57 @@ var updateUserById = function updateUserById(email, name, city, Id) {
   });
 };
 
+var updateUserById = function updateUserById(email, name, city, Id) {
+  var _ref5, _ref6, results, fields;
+
+  return regeneratorRuntime.async(function updateUserById$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.next = 2;
+          return regeneratorRuntime.awrap(connection.query("   update Users\n            set email = ?, name = ?, city = ?\n            where id = ?", [email, name, city, Id]));
+
+        case 2:
+          _ref5 = _context3.sent;
+          _ref6 = _slicedToArray(_ref5, 2);
+          results = _ref6[0];
+          fields = _ref6[1];
+
+        case 6:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  });
+};
+
+var deleteUserById = function deleteUserById(Id) {
+  var _ref7, _ref8, results, fields;
+
+  return regeneratorRuntime.async(function deleteUserById$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.next = 2;
+          return regeneratorRuntime.awrap(connection.query("   delete from Users where id = ?", [Id]));
+
+        case 2:
+          _ref7 = _context4.sent;
+          _ref8 = _slicedToArray(_ref7, 2);
+          results = _ref8[0];
+          fields = _ref8[1];
+
+        case 6:
+        case "end":
+          return _context4.stop();
+      }
+    }
+  });
+};
+
 module.exports = {
   getAllUsers: getAllUsers,
-  updateUserById: updateUserById
+  getUserById: getUserById,
+  updateUserById: updateUserById,
+  deleteUserById: deleteUserById
 };

@@ -2,7 +2,7 @@
 
 const connection = require('../config/database');
 
-const {getAllUsers, updateUserById} = require('../services/CRUDService');
+const {getAllUsers,getUserById, updateUserById, deleteUserById } = require('../services/CRUDService');
 
 const getHomePage = async (req, res) => {
     const results = await getAllUsers();
@@ -18,12 +18,10 @@ const getUser = (req, res) => {
 }
 
 const getUpdateUser = async (req, res) => {
-
     const userId = req.params.id;
-    let [results, fields] = await connection.query('select * from Users where id = ? ', [userId]);
-
-    let user = results && results.length > 0 ? results[0] : {};
+    let user = await getUserById(userId);
     res.render('editUser.ejs', {userEdit : user});
+
 }
 
 const postCreateUser = async (req, res) => {
@@ -46,9 +44,10 @@ const postCreateUser = async (req, res) => {
         ` INSERT INTO Users (email, name, city) VALUES (?, ?, ?)`, [email, name, city]
         );
 
-    console.log(" ===> check results : ", results);
+    // console.log(" ===> check results : ", results);
+    // res.send('add new user success !!!');
 
-    res.send('add new user success !!!');
+    res.redirect('/');
 
 }
 
@@ -64,10 +63,28 @@ const postUpdateUser = async (req, res) => {
     res.redirect('/');
 }
 
+const postDeleteUser = async (req, res) => {
+    const userId = req.params.id;
+    let user = await getUserById(userId);
+    res.render('deleteUser.ejs', {userEdit : user});
+}
+
+const postHandleRemoveUser = async (req, res) => {
+    let Id = req.body.Id;
+    await deleteUserById(Id);
+    //return to homePage
+    res.redirect('/');
+
+    // res.send(alert("the user has been successfully deleted !!") && window.location.href = "/" );
+}
+
 module.exports = {
-    getHomePage, getDemo,
+    getHomePage,
+    getDemo,
     postCreateUser,
     getUser,
     getUpdateUser,
     postUpdateUser,
+    postDeleteUser,
+    postHandleRemoveUser,
 }

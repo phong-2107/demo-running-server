@@ -83,6 +83,17 @@
     margin: .5rem 0;
 }
 
+.content_input-group{
+  margin-bottom: .75rem;
+  color: #555;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.content_input-group span{
+  color: crimson;
+}
+
 .input-group input{
     padding: .25rem;
     height: 25px;
@@ -93,9 +104,11 @@
 }
 
 
-/* .item__list-button{
-
-} */
+.item__list-button{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 
 .item_button{
   border: none;

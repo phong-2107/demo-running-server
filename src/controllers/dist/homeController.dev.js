@@ -1,19 +1,13 @@
 "use strict";
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 // const { connect } = require("../routes/web");
 var connection = require('../config/database');
 
 var _require = require('../services/CRUDService'),
     getAllUsers = _require.getAllUsers,
-    updateUserById = _require.updateUserById;
+    getUserById = _require.getUserById,
+    updateUserById = _require.updateUserById,
+    deleteUserById = _require.deleteUserById;
 
 var getHomePage = function getHomePage(req, res) {
   var results;
@@ -47,27 +41,22 @@ var getUser = function getUser(req, res) {
 };
 
 var getUpdateUser = function getUpdateUser(req, res) {
-  var userId, _ref, _ref2, results, fields, user;
-
+  var userId, user;
   return regeneratorRuntime.async(function getUpdateUser$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
           userId = req.params.id;
           _context2.next = 3;
-          return regeneratorRuntime.awrap(connection.query('select * from Users where id = ? ', [userId]));
+          return regeneratorRuntime.awrap(getUserById(userId));
 
         case 3:
-          _ref = _context2.sent;
-          _ref2 = _slicedToArray(_ref, 2);
-          results = _ref2[0];
-          fields = _ref2[1];
-          user = results && results.length > 0 ? results[0] : {};
+          user = _context2.sent;
           res.render('editUser.ejs', {
             userEdit: user
           });
 
-        case 9:
+        case 5:
         case "end":
           return _context2.stop();
       }
@@ -99,10 +88,11 @@ var postCreateUser = function postCreateUser(req, res) {
 
         case 5:
           results = _context3.sent;
-          console.log(" ===> check results : ", results);
-          res.send('add new user success !!!');
+          // console.log(" ===> check results : ", results);
+          // res.send('add new user success !!!');
+          res.redirect('/');
 
-        case 8:
+        case 7:
         case "end":
           return _context3.stop();
       }
@@ -136,11 +126,59 @@ var postUpdateUser = function postUpdateUser(req, res) {
   });
 };
 
+var postDeleteUser = function postDeleteUser(req, res) {
+  var userId, user;
+  return regeneratorRuntime.async(function postDeleteUser$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          userId = req.params.id;
+          _context5.next = 3;
+          return regeneratorRuntime.awrap(getUserById(userId));
+
+        case 3:
+          user = _context5.sent;
+          res.render('deleteUser.ejs', {
+            userEdit: user
+          });
+
+        case 5:
+        case "end":
+          return _context5.stop();
+      }
+    }
+  });
+};
+
+var postHandleRemoveUser = function postHandleRemoveUser(req, res) {
+  var Id;
+  return regeneratorRuntime.async(function postHandleRemoveUser$(_context6) {
+    while (1) {
+      switch (_context6.prev = _context6.next) {
+        case 0:
+          Id = req.body.Id;
+          _context6.next = 3;
+          return regeneratorRuntime.awrap(deleteUserById(Id));
+
+        case 3:
+          //return to homePage
+          res.redirect('/'); // res.send(alert("the user has been successfully deleted !!") && window.location.href = "/" );
+
+        case 4:
+        case "end":
+          return _context6.stop();
+      }
+    }
+  });
+};
+
 module.exports = {
   getHomePage: getHomePage,
   getDemo: getDemo,
   postCreateUser: postCreateUser,
   getUser: getUser,
   getUpdateUser: getUpdateUser,
-  postUpdateUser: postUpdateUser
+  postUpdateUser: postUpdateUser,
+  postDeleteUser: postDeleteUser,
+  postHandleRemoveUser: postHandleRemoveUser
 };

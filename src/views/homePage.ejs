@@ -63,7 +63,9 @@
 
                 <td class="item__list-button">
                   <a class="item_button" href="/update-user/<%= listUsers[i].id %>">edit</a>
-                  <a class="item_button">Delete</a>
+                  <form action="/delete-user/<%= listUsers[i].id %>" method="post">
+                    <button class="item_button">Delete</button>
+                  </form>
                 </td>
               </tr>
             <% } %>
