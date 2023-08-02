@@ -1,15 +1,18 @@
-const express = require('express');
-
 require('dotenv').config();
+const express = require('express');
 const configViewEngine = require('./config/viewEngine');
-const webRoutes = require('./routes/web');
-
-const apiRoutes = require('./routes/api');
 const connection = require('./config/database');
+const fileUpload = require('express-fileupload');
+
+const webRoutes = require('./routes/web');
+const apiRoutes = require('./routes/api');
 
 const app = express();
 const port = process.env.PORT || 8888;
 const hostname = process.env.HOST_NAME;
+
+//config file upload
+app.use(fileUpload());
 
 // config req.body
 app.use(express.json());

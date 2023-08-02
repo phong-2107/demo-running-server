@@ -27,6 +27,8 @@ const deleteUserById = async (Id) => {
     );
 }
 
+
+
 module.exports = {
     getAllUsers,
     getUserById,
