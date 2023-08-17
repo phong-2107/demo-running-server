@@ -11,7 +11,8 @@ const {getUserAPI,
 
 const { postCreateCustomer,
         getListCustomer,
-        deleteACustomer
+        deleteACustomer,
+        deleteAllCustomer
 } = require('../controllers/customerController');
 
 routerAPI.get('/', (req, res) => {
@@ -33,4 +34,20 @@ routerAPI.post('/files',postUploadMultiFileAPI);
 routerAPI.post('/customers',postCreateCustomer);
 routerAPI.get('/customers',getListCustomer);
 routerAPI.delete('/customers',deleteACustomer);
+routerAPI.delete('/customers-list',deleteAllCustomer);
+
+// routerAPI.get('/info', (req, res) => {
+//     return res.status(200).json(
+//         EC: 0,
+//         data: req.query
+//     })
+// });
+
+routerAPI.get('/info/:name/:address/:email', (req, res) => {
+    return res.status(200).json({
+        EC: 0,
+        data: req.params
+    })
+});
+
 module.exports = routerAPI;
