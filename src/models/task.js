@@ -28,8 +28,7 @@ const taskSchema = new mongoose.Schema(
         startDate: String,
         endDate: String,
         description: String,
-        customerInfo: customerSchema,
-        userInfo: UserSchema,
+        usersInfo: UserSchema,
         projectInfo: projectSchema,
     },
     {
@@ -39,7 +38,7 @@ const taskSchema = new mongoose.Schema(
 
 
 // Override all methods
-customerSchema.plugin(mongoose_delete, { overrideMethods: 'all' });
-customerSchema.plugin(mongoose_delete);
+taskSchema.plugin(mongoose_delete, { overrideMethods: 'all' });
+taskSchema.plugin(mongoose_delete);
 const Task = mongoose.model('Task', taskSchema);
 module.exports = Task;

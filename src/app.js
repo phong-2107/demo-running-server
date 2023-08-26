@@ -29,8 +29,9 @@ app.use('/v1/', apiRoutes);
 
 ( async () => {
   try {
-    // await connection();
+    await connection();
 
+    /*
     // ============ using mongodb drive =================
     // Connection URL
     const url = process.env.DB_HOST_WITH_DRIVER;
@@ -41,15 +42,19 @@ app.use('/v1/', apiRoutes);
 
     await client.connect();
     console.log('Connected successfully to server');
+    // const db = client.db(dbName);
+    // const collection = db.collection('customers');
     const db = client.db(dbName);
-    const collection = db.collection('customers');
+    const collection = db.collection('projects');
     // save data
     // collection.insertOne({"name": "Nguyen Phong"});
-    collection.insertOne({"address" : "HCM", email : "test@gamil.com" });
+    // collection.insertOne({"address" : "HCM", email : "test@gamil.com" });
 
     // find data
-    let tmp = await collection.findOne({address : "HCM"});
-    console.log("find HCM : >>>> " , tmp);
+    // let tmp = await collection.findOne({address : "HCM"});
+    // console.log("find HCM : >>>> " , tmp);
+
+    */
     app.listen(port, hostname, () => {
       console.log(`Example app listening on port ${port}`)
     })

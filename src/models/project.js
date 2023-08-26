@@ -25,10 +25,10 @@ const projectSchema =  new mongoose.Schema(
         startDate: String,
         endDate: String,
         description: String,
-        customerInfo: customerSchema,
-        userInfo: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+        customerInfor: customerSchema,
+        usersInfor: [{type: mongoose.Schema.Types.ObjectId, ref: 'user'}],
         leader: UserSchema,
-        tasks: [{type: mongoose.Schema.Types.ObjectId, ref: "Task"}]
+        tasks: [{type: mongoose.Schema.Types.ObjectId, ref: 'Task'}]
     },
     {
         timestamps: true,
@@ -37,7 +37,6 @@ const projectSchema =  new mongoose.Schema(
 
 
 // Override all methods
-customerSchema.plugin(mongoose_delete, { overrideMethods: 'all' });
-customerSchema.plugin(mongoose_delete);
+projectSchema.plugin(mongoose_delete, { overrideMethods: 'all' });
 const Project = mongoose.model('Project', projectSchema);
 module.exports = Project;
